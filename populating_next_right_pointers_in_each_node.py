@@ -10,3 +10,13 @@ class Solution:
     # @param root, a tree node
     # @return nothing
     def connect(self, root):
+        start = root
+        curr = root
+        while start and start.left:
+            curr.left.next = curr.right
+            if curr.next:
+                curr.right.next = curr.next.left
+                curr = curr.next
+            else:
+                curr = start.left
+                start = curr
