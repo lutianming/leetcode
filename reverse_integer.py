@@ -6,10 +6,11 @@ class Solution:
         else:
             op = -1
         x = abs(x)
-        s = str(x)
-        n = len(str(x))
         val = 0
-        for i in range(n):
-            val += int(s[i]) * 10**(i)
+        while x != 0:
+            digit = x % 10
+            val *= 10
+            val += digit
+            x = x / 10
         val *= op
         return val
