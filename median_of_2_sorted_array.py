@@ -5,25 +5,34 @@ class Solution:
             return self._findMedian(A)
         if A is None or len(A) == 0:
             return self._findMedian(B)
+
+        if A[0] >= B[-1]:
+            return self._findMedian(B+A)
+        if B[0] >= A[-1]:
+            return self._findMedian(A+B)
+
         m = len(A)
         n = len(B)
         if m == 1 and n == 1:
             return (A[0] + B[0])/2.0
 
         if m == 2 and n == 2:
+            pass
 
         i = m/2
         j = n/2
-        a_i = a[i]
-        b_j = b[j]
+        k = min(i, j)
+        a_i = A[k]
+        b_j = B[k]
+
         if a_i <= b_j:
-            k = min(i, n-j-1)
-            a = a[k:]
-            b = b[:-k]
+            a = A[k+1:]
+            b = B[0:k]
         else:
-            k = min(m-i-1, j)
-            a = a[:-k]
-            b = b[k:]
+            a = A[0:k]
+            b = B[k+1:]
+        print(a, b)
+        return self.findMedianSortedArrays(a, b)
 
     def _findMedian(self, A):
         n = len(A)
@@ -31,3 +40,6 @@ class Solution:
             return (A[n/2]+A[n/2-1])/2.0
         else:
             return A[n/2]
+
+s = Solution()
+print(s.findMedianSortedArrays([1,2], [1,2]))
